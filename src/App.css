@@ -3,10 +3,31 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 20vmin;
   pointer-events: none;
 }
 
+.App-photo {
+  max-width: 60vh;
+}
+
+.App-info {
+  font-size: 18px;
+  display: block;
+  justify-content: center;
+  font-style: italic;
+  max-width: 800px;
+}
+
+.App-info button {
+  padding: 10px 2px;
+  border: 2px solid rgb(105, 103, 103);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: #02050b;
+  color: white;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
