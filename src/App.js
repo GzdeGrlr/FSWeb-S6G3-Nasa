@@ -1,7 +1,62 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
+// import "./App.css";
 import axios from "axios";
-import { fakeData } from "./fakeData";
+import styled from "styled-components";
+
+const AppDiv = styled.div`
+  text-align: center;
+`;
+
+const AppHeader = styled.div`
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+`;
+
+const AppLogo = styled.img`
+  height: 20vmin;
+  pointer-events: none;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: App-logo-spin infinite 20s linear;
+  }
+
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
+const AppPhoto = styled.img`
+  max-width: 60vh;
+`;
+
+const AppInfo = styled.div`
+  font-size: 18px;
+  display: block;
+  justify-content: center;
+  font-style: italic;
+  max-width: 800px;
+`;
+
+const AppInfoButton = styled.button`
+  padding: 10px 2px;
+  border: 2px solid rgb(105, 103, 103);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: #02050b;
+  color: white;
+`;
 
 function App() {
   const [picture, setPicture] = useState(null);
@@ -24,25 +79,22 @@ function App() {
     axios.get(url + urlDifference[day - 1]).then((response) => {
       setPicture(response.data);
     });
-  });
+  }, [day]);
 
   return (
-    <div className="App">
-      <div className="App-header">
-        <span>
-          <img
-            src="https://api.nasa.gov/assets/img/favicons/favicon-192.png"
-            className="App-logo"
-            alt="logo"
-          />
-        </span>
+    <AppDiv>
+      <AppHeader>
+        <AppLogo
+          src="https://api.nasa.gov/assets/img/favicons/favicon-192.png"
+          alt="logo"
+        ></AppLogo>
 
         {picture === null ? (
           <div>APOD is loading...</div>
         ) : (
           <div>
-            <img className="App-photo" src={picture.url} alt={"Apod"} />
-            <div className="App-info">
+            <AppPhoto src={picture.url} alt={"Apod"}></AppPhoto>
+            <AppInfo>
               <p>
                 <strong>Title: </strong>
                 {picture.title}
@@ -54,18 +106,18 @@ function App() {
               <p>
                 <strong>Explanation:</strong> {picture.explanation}
               </p>
-              <button
+              <AppInfoButton
                 onClick={() => {
                   setDay(day + 1);
                 }}
               >
                 Click me to change the photo!
-              </button>
-            </div>
+              </AppInfoButton>
+            </AppInfo>
           </div>
         )}
-      </div>
-    </div>
+      </AppHeader>
+    </AppDiv>
   );
 }
 
